@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="InfToRPN_Convert.h" />
     <ClInclude Include="RPN_calc.h" />
-    <ClInclude Include="spisok.h" />
     <ClInclude Include="stack.h" />
   </ItemGroup>
   <ItemGroup>

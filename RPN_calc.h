@@ -11,27 +11,27 @@
 using namespace std;
 #define MAXSTACK    30
 
-#define OP_QUIT      0
+#define OP_QUIT      0 //
 #define OP_PUSH_OLD  1
-#define OP_PUSH_NEW  2
-#define OP_ADD       3
-#define OP_SUB       4
-#define OP_MUL       5
-#define OP_DIV       6
+#define OP_PUSH_NEW  2//
+#define OP_ADD       3//
+#define OP_SUB       4//
+#define OP_MUL       5//
+#define OP_DIV       6//
 #define OP_ERR       7
-#define OP_NOTHING   8
+#define OP_NOTHING   8 //
 #define OP_clear     9
 #define OP_CLEAR     10
-#define OP_NOTNUM    11
+#define OP_NOTNUM    11 //
 #define OP_SWAP      12
 #define OP_SQRT      13
 #define OP_EXP       14
 #define OP_POW       15
 #define OP_LN        16
 #define OP_LOG       17
-#define OP_PUSHPI    18
+#define OP_PUSHPI    18 //
 #define OP_DEGREE    19
-#define OP_NOTKEY    20
+#define OP_NOTKEY    20 //
 #define OP_SIN       21
 #define OP_COS       22
 #define OP_TAN       23
@@ -147,8 +147,8 @@ struct key {
 };
 
 static struct key keys[] = {
-	"c", OP_clear,
-	"C", OP_CLEAR,
+	"c", OP_clear,//
+	"C", OP_CLEAR,//
 	"s", OP_SWAP,
 	"sto", OP_STO,
 	"stoa", OP_STOA,
@@ -207,18 +207,18 @@ static struct key keys[] = {
 	"sqrt", OP_SQRT,
 	"exp", OP_EXP,
 	"xp", OP_EXP,
-	"pow", OP_POW,
-	"ln", OP_LN,
-	"log", OP_LOG,
-	"pi", OP_PUSHPI,
+	"pow", OP_POW,//
+	"ln", OP_LN,//
+	"log", OP_LOG,//
+	"pi", OP_PUSHPI,//
 	"d", OP_DEGREE,
-	"sin", OP_SIN,
-	"cos", OP_COS,
-	"tan", OP_TAN,
-	"asin", OP_ASIN,
-	"acos", OP_ACOS,
-	"atan", OP_ATAN,
-	"q", OP_QUIT,
+	"sin", OP_SIN,//
+	"cos", OP_COS,//
+	"tan", OP_TAN,//
+	"asin", OP_ASIN,//
+	"acos", OP_ACOS,//
+	"atan", OP_ATAN,//
+	"q", OP_QUIT,//
 	"terse", OP_TERSE,
 	"verbose", OP_VERBOSE,
 	"display", OP_DISPLAY,
@@ -228,7 +228,8 @@ static struct key keys[] = {
 	"print", OP_PRINT,
 	"#", OP_COMMENT,
 	"rsp", OP_RSP,
-	"z", OP_NOTKEY };
+	"z", OP_NOTKEY //
+};
 
 static char keyloc[KEYLEN];
 FILE* fp, * fopen();
