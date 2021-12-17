@@ -237,15 +237,38 @@ static int terse = 0;
 int getop(double* numptr);
 void initstack(void);
 void push(double num);
-double pop(void);
+double pop(void)
+{
+	if (stackptr == stack) {
+		fprintf(stderr, "неправильная запись\n");
+		return(0.0);
+	}
+
+	return(*--stackptr);
+}
 void display(int longe);
 void untrail(void);
 void untrailstd(void);
-int isnotnumber(int c);
-int ischar(int c);
-double double_abs(double num);
+int isnotnumber(int c)
+{
+	return((((c >= '0') && (c <= '9')) || (c == '.')) == 0);
+}
+int ischar(int c)
+{
+	return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+}
+double double_abs(double num)
+{
+	return(num < 0 ? -num : num);
+}
 void getkey(char* s, int c);
-int keycmp(char* s, char* t);
+int keycmp(char* s, char* t)
+{
+	for (; *s == *t; s++, t++)
+		if (*s == '\0')
+			return(1);
+	return(0);
+}
 
 
 

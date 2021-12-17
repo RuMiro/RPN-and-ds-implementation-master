@@ -553,95 +553,95 @@ void main(int argc, char* argv[])
 }
 
 
-
 int getop(double* numptr)
 {
-	int hex_num;
-	int c;
-	struct key* keyptr;
+int hex_num;
+int c;
+struct key* keyptr;
 
-	while (((c = getc(fp)) == ' ') || (c == '\t'))
-		;
-	switch (c) {
-	case EOF:
-		return(EOF);
-	case '\n':
-		return(OP_PUSH_OLD);
-	case '*':
+while (((c = getc(fp)) == ' ') || (c == '\t'))
+;
+switch (c) {
+case EOF:
+	return(EOF);
+case '\n':
+	return(OP_PUSH_OLD);
+case '*':
+	untrail();
+	return(OP_MUL);
+
+case '/':
+	untrail();
+	return(OP_DIV);
+
+case '%':
+	untrail();
+	return(OP_MODULO);
+
+case '-':
+	if (isnotnumber(c = getc(fp))) { /*subtraction*/
+		ungetc(c, fp);
 		untrail();
-		return(OP_MUL);
+		return(OP_SUB);
+	}
+	else { /*negative number*/
+		sign = NEG;
+		ungetc(c, fp);
+		return(OP_NOTHING);
+	}
 
-	case '/':
+case '+':
+	if (isnotnumber(c = getc(fp))) { /*addition*/
+		ungetc(c, fp);
 		untrail();
-		return(OP_DIV);
+		return(OP_ADD);
+	}
+	else { /*positive number*/
+		ungetc(c, fp);
+		return(OP_NOTHING);
+	}
 
-	case '%':
-		untrail();
-		return(OP_MODULO);
-
-	case '-':
-		if (isnotnumber(c = getc(fp))) { /*subtraction*/
-			ungetc(c, fp);
-			untrail();
-			return(OP_SUB);
-		}
-		else { /*negative number*/
-			sign = NEG;
-			ungetc(c, fp);
-			return(OP_NOTHING);
-		}
-
-	case '+':
-		if (isnotnumber(c = getc(fp))) { /*addition*/
-			ungetc(c, fp);
-			untrail();
-			return(OP_ADD);
-		}
-		else { /*positive number*/
-			ungetc(c, fp);
-			return(OP_NOTHING);
-		}
-
-	default:
-		if (isnotnumber(c)) {
-			getkey(keyloc, c);
-			for (keyptr = keys; (*(keyptr->name) != 'z') && (keycmp(keyptr->name, keyloc) == 0); keyptr++)
-				;
-			return(keyptr->op);
-		}
-		else {  /*number*/
-			if (c == '0')
-				if ((c = getc(fp)) == 'x') {
-					if (fscanf_s(fp, "%x", &hex_num)) {
-						*numptr = (hex_num * sign);
-						untrail();
-						return(OP_PUSH_NEW);
-					}
-					else {
-						getc(fp);
-						untrail();
-						return(OP_NOTNUM);
-					}
+default:
+	if (isnotnumber(c)) {
+		getkey(keyloc, c);
+		for (keyptr = keys; (*(keyptr->name) != 'z') && (keycmp(keyptr->name, keyloc) == 0); keyptr++)
+			;
+		return(keyptr->op);
+	}
+	else {  /*number*/
+		if (c == '0')
+			if ((c = getc(fp)) == 'x') {
+				if (fscanf_s(fp, "%x", &hex_num)) {
+					*numptr = (hex_num * sign);
+					untrail();
+					return(OP_PUSH_NEW);
 				}
 				else {
-					ungetc(c, fp);
-					c = '0';
+					getc(fp);
+					untrail();
+					return(OP_NOTNUM);
 				}
-
-			ungetc(c, fp);
-			if (fscanf_s(fp, "%lf", numptr)) {
-				untrail();
-				*numptr = (*numptr * sign);
-				return(OP_PUSH_NEW);
 			}
 			else {
-				getc(fp);
-				untrail();
-				return(OP_NOTNUM);
+				ungetc(c, fp);
+				c = '0';
 			}
-		} /*number*/
-	}  /*switch (c) */
+
+		ungetc(c, fp);
+		if (fscanf_s(fp, "%lf", numptr)) {
+			untrail();
+			*numptr = (*numptr * sign);
+			return(OP_PUSH_NEW);
+		}
+		else {
+			getc(fp);
+			untrail();
+			return(OP_NOTNUM);
+		}
+	} /*number*/
+}  /*switch (c) */
 }
+
 
 void initstack(void)
 {
@@ -661,15 +661,7 @@ void push(double num)
 	*stackptr++ = num;
 }
 
-double pop(void)
-{
-	if (stackptr == stack) {
-		fprintf(stderr, "неправильная запись\n");
-		return(0.0);
-	}
 
-	return(*--stackptr);
-}
 
 void display(int longe)
 {
@@ -709,20 +701,11 @@ void untrailstd(void)
 		ungetc(c, stdin);
 }
 
-int isnotnumber(int c)
-{
-	return((((c >= '0') && (c <= '9')) || (c == '.')) == 0);
-}
 
-int ischar(int c)
-{
-	return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
-}
 
-double double_abs(double num)
-{
-	return(num < 0 ? -num : num);
-}
+
+
+
 
 void getkey(char* s, int c)
 {
@@ -745,13 +728,6 @@ void getkey(char* s, int c)
 	}
 }
 
-int keycmp(char* s, char* t)
-{
-	for (; *s == *t; s++, t++)
-		if (*s == '\0')
-			return(1);
-	return(0);
-}
 
 
 
