@@ -18,6 +18,8 @@ int GetPriority(char op) {
     case'l':
     case'g':
     case't':
+    case'a':
+    case'r':
 	case '^':
 		return 4;
 		break;
@@ -93,7 +95,41 @@ string RPN(char* line, int maxLength) {
             res += stack.Pop();
             checkPriority = GetPriority(stack.Peek());
         }
-        if ((line[i] == 'c' && line[i + 1] == 'o' && line[i+2] == 's') || (line[i] == 'c' && line[i + 1] == 't' && line[i + 2] == 'g')) {
+        if (line[i] == 'a' && line[i + 1] == 'r' && line[i + 2] == 'c') {
+            if ((line[i+3] == 'c' && line[i + 4] == 'o' && line[i + 5] == 's')) {
+                stack.Push(' ');
+                i += 5;
+                stack.Push(line[i]);
+                stack.Push(line[i - 1]);
+                stack.Push(line[i - 2]);
+                stack.Push(line[i - 3]);
+                stack.Push(line[i - 4]);
+                stack.Push(line[i - 5]);
+                continue;
+            }
+            if ((line[i+3] == 's' && line[i + 4] == 'i' && line[i + 5] == 'n')) {
+                stack.Push(' ');
+                i += 5;
+                stack.Push(line[i]);
+                stack.Push(line[i - 1]);
+                stack.Push(line[i - 2]);
+                stack.Push(line[i - 3]);
+                stack.Push(line[i - 4]);
+                stack.Push(line[i - 5]);
+                continue;
+            }
+            if (line[i+3] == 't' && line[i + 4] == 'g') {
+                stack.Push(' ');
+                i += 4;
+                stack.Push(line[i]);
+                stack.Push(line[i - 1]);
+                stack.Push(line[i - 2]);
+                stack.Push(line[i - 3]);
+                stack.Push(line[i - 4]);
+                continue;
+            }
+        }
+        if ((line[i] == 'c' && line[i + 1] == 'o' && line[i+2] == 's')) {
             stack.Push(' ');
             i += 2;
             stack.Push(line[i]);
