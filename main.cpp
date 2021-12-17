@@ -18,25 +18,27 @@ void main(int argc, char* argv[])
     //main2();
     int a(0);
 	while (true) {
-		cout << "1.Конвертор" << endl << "2.Калькулятор" << endl;
+		
+		cout << "1.Конвертор" << endl << "2.Калькулятор" << endl << "3.Выход \n";
 		cin >> a;
 		string res;
 		switch (a)
 		{
+		case 3: return;
 		case 1:
 			getRPN();
 			break;
 		case 2:
 			cin.ignore();
-			fprintf(stderr, "Reverse Polish notation calculator\n\
- q     quits\n\
- c     removes last stack position\n\
- C     clears  stack\n\
- operators are +,-,*,/ (+ and - also unary)\n\
- sqrt (4 sqrt result 2),  log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8),\n\
- pi = 3.14, sin, cos, tan, asin, acos, atan in radians\n");
+			fprintf(stderr, "Калькулятор обратной польской нотации\n\
+ q   Выход\n\
+ c   Убрать элемент последний стека\n\
+ C   Очистить весь стек\n\
+доступные операции: +,-,*,/ \n\
+ sqrt (4 sqrt результат 2),  log (1 log результат 0), ln(2,7 ln (прибризительно) результат 1, pow (2 3pow результат 8),\n\
+ pi = 3.14, sin, cos, tan, asin, acos, atan в радианах\n");
 
-			cout << "Write RPN: ";
+			cout << "Напишите пример в ОПН: ";
 			int optype;
 			double val, temp, temp2;
 
@@ -125,7 +127,7 @@ void main(int argc, char* argv[])
 				case OP_LN:
 					temp = pop();
 					if (temp <= 0) {
-						fprintf(stderr, "cannot use 0 or negative\n");
+						fprintf(stderr, "на ноль делить нельзя\n");
 						push(temp);
 					}
 					else
@@ -135,7 +137,7 @@ void main(int argc, char* argv[])
 				case OP_LOG:
 					temp = pop();
 					if (temp <= 0) {
-						fprintf(stderr, "cannot use 0 or negative\n");
+						fprintf(stderr, "0 в степени 0\n");
 						push(temp);
 					}
 					else
@@ -197,11 +199,11 @@ void main(int argc, char* argv[])
 
 	
 				case OP_NOTNUM:
-					fprintf(stderr, "not a number\n");
+					fprintf(stderr, "такого числа нет\n");
 					break;
 
 				case OP_NOTKEY:
-					fprintf(stderr, "not a keyword: %s\n", keyloc);
+					fprintf(stderr, "такой буквы нет %s\n", keyloc);
 					break;
 
 				case OP_PRINT:
@@ -229,7 +231,7 @@ void main(int argc, char* argv[])
 					break;
 
 				default:
-					fprintf(stderr, "bad input\n");
+					fprintf(stderr, "неправильный ввод\n");
 					exit(1);
 				}
 				if ((optype != OP_NOTHING) && (optype != OP_NOTNUM) && (optype != OP_NOTKEY)
@@ -430,7 +432,7 @@ void getkey(char* s, int c)
 		while ((ischar(c = getc(fp))) && ((t - s) < (KEYLEN - 1)));
 		*t = '\0';
 		ungetc(c, fp);
-		if (!(keycmp(s, "print") || keycmp(s, "input")))
+		if (!(keycmp(s, "вывод") || keycmp(s, "вход")))
 			untrail();
 	}
 }

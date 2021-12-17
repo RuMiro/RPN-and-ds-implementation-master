@@ -20,7 +20,7 @@ int GetPriority(char op) {
     case't':
     case'a':
     case'r':
-	case '^':
+    case 'w':
 		return 4;
 		break;
 	case '/':
@@ -49,10 +49,10 @@ string RPN(char* line, int maxLength);
 int getRPN() {
     cin.ignore();
 	char line[128];
-    std::cout << "infix: ";
+    std::cout << "Пример в инфиксной записи: ";
     cin.getline(line, 128);
     string res = RPN(line, 128);
-	std::cout << "Result rpn: " << res  << "\n";
+	std::cout << "Пример в обратной польской нотации: " << res  << "\n";
 	return 0;
 }
 
@@ -65,6 +65,19 @@ string RPN(char* line, int maxLength) {
     {
         
         if (line[i] == ' ') continue;
+
+        if (i != 0 && i != 1) {
+            if (GetPriority(line[i + 1]) > 1) {
+                if (!ischar(line[i + 1])) {
+                    res += ' ';
+                }
+            }
+            if (GetPriority(line[i - 1]) > 1) {
+                if (!ischar(line[i - 1])) {
+                    res += ' ';
+                }
+            }
+        }
 
         int currentPriotity = GetPriority(line[i]);
 
@@ -92,74 +105,82 @@ string RPN(char* line, int maxLength) {
         int checkPriority = GetPriority(stack.Peek());
         while (checkPriority >= currentPriotity && checkPriority != 1 && stack.Peek() != NULL)
         {
-            res += stack.Pop();
+            char c = stack.Pop();
+            res += c;
+            if (GetPriority(c) != 4 && GetPriority(c) != 0) res += ' ';
             checkPriority = GetPriority(stack.Peek());
         }
-        if (line[i] == 'a' && line[i + 1] == 'r' && line[i + 2] == 'c') {
-            if ((line[i+3] == 'c' && line[i + 4] == 'o' && line[i + 5] == 's')) {
-                stack.Push(' ');
-                i += 5;
+        if (line[i] == 'a') {
+            if ((line[i+1] == 'c' && line[i + 2] == 'o' && line[i + 3] == 's')) {
+                i += 3;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
-                stack.Push(line[i - 4]);
-                stack.Push(line[i - 5]);
+                stack.Push(' ');
                 continue;
             }
-            if ((line[i+3] == 's' && line[i + 4] == 'i' && line[i + 5] == 'n')) {
-                stack.Push(' ');
-                i += 5;
+            if ((line[i+1] == 's' && line[i + 2] == 'i' && line[i + 3] == 'n')) {
+                i += 3;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
-                stack.Push(line[i - 4]);
-                stack.Push(line[i - 5]);
+                stack.Push(' ');
                 continue;
             }
-            if (line[i+3] == 't' && line[i + 4] == 'g') {
-                stack.Push(' ');
-                i += 4;
+            if ((line[i + 1] == 't' && line[i + 2] == 'a' && line[i + 3] == 'n')) {
+                i += 3;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
-                stack.Push(line[i - 4]);
+                stack.Push(' ');
                 continue;
             }
         }
-        if ((line[i] == 'c' && line[i + 1] == 'o' && line[i+2] == 's')) {
-            stack.Push(' ');
+        if ((line[i] == 't' && line[i + 1] == 'a' && line[i + 2] == 'n')) {
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
+            stack.Push(' ');
+            continue;
+        }
+        if ((line[i] == 'c' && line[i + 1] == 'o' && line[i+2] == 's')) {
+            i += 2;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            stack.Push(line[i - 2]);
+            stack.Push(' ');
+
             continue;
         }
         if (line[i] == 'p' && line [i+1] == 'i') {
-            stack.Push(' ');
             i += 1;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
+            stack.Push(' ');
+
             continue;
         }
         if ((line[i] == 'l' && line[i + 1] == 'n') || (line[i] == 'l' && line[i + 1] == 'o' && line[i + 2] == 'g')) {
-            stack.Push(' ');
             if (line[i + 1] == 'n') {
                 i += 1;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
+                stack.Push(' ');
                 continue;
+
                 }
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
+            stack.Push(' ');
             continue;
         }
         if ((line[i] == 's' && line[i + 1] == 'i' && line[i + 2] == 'n') || ((line[i] == 's' && line[i + 1] == 'q' && line[i + 2] == 'r' && line[i + 3] == 't'))) {
-            stack.Push(' ');
             if (line[i + 1] == 'q') {
 
                 i += 3;
@@ -167,23 +188,47 @@ string RPN(char* line, int maxLength) {
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
+                stack.Push(' ');
                 continue;
             }
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
+            stack.Push(' ');
             continue;
         }   
+        if ((line[i] == 'p' && line[i + 1] == 'o' && line[i + 2] == 'w')) {
+            stack.Push(' ');
+            i += 2;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            stack.Push(line[i - 2]);
+            stack.Push(' ');
+            continue;
+        }
+
         if (currentPriotity != 0) stack.Push(' ');
         stack.Push(line[i]);
 
     }
     while (stack.Peek() != NULL) {
-        res += stack.Pop();
+        char c = stack.Pop();
+        if (GetPriority(c) > 1) {
+            if (!ischar(c)) {
+                res += ' ';
+            }
+        }
+        res += c;
+
     }
+
+    size_t pos;
+    while ((pos = res.find("  ")) != string::npos)
+        res = res.replace(pos, 2, " ");
+
     return res;
 }
 
 #endif  
-// (1+2)^3+sin(4+5)^(6*7)
+// (1+2)pow3+sin(4+5)^(6*7)
