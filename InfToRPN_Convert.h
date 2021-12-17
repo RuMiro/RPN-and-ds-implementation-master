@@ -6,108 +6,143 @@
 #include <string>
 #include "stack.h"
 
-using namespace std;
-
-int priority(char op) {
+;
+int GetPriority(char op) {
 	switch (op) {
+	case's':
+	case'i':
+	case'n':
+	case'c':
+	case'o':
+	case'p':
+    case'l':
+    case'g':
 	case '^':
-		return 3;
+		return 4;
 		break;
 	case '/':
 	case '*':
-		return 2;
+		return 3;
 		break;
 	case '+':
 	case '-':
+		return 2;
+		break;
+	case '(': case ')':
 		return 1;
 		break;
-	default:
-		return 0;
-		break;
 	}
-}
-
-std::string topostfix(std::string s) {
-	stacks<std::string> qq;
-	std::string result;
-
-	if (s == "") return "empty line!"; else {
-		for (int i = 0; i < s.size(); i++) {
-
-		}
-
-		for (int i = 0; i < s.size(); i++) {
-			if (s[i] >= '0' && s[i] <= '9') result += s[i];
-			else {
-				switch (s[i]) {
-				case '(':
-					qq.push("(");
-					break;
-				case ')':
-					if (qq.top() != "(") {
-						while (qq.top() != "(") {
-							result += qq.top();
-							qq.pop();
-						}
-					}
-					qq.pop();
-					break;
-				case 'l':
-					if (s[i + 1] == 'n') {
-						qq.push(s.substr(i, 2));
-						i += 1;
-						continue;
-						break;
-					}
-					qq.push(s.substr(i, 3));
-					i += 2;
-					continue;
-					break;
-				case 't':
-					qq.push(s.substr(i, 2));
-					i += 1;
-					continue;
-					break;
-				case 's':
-					if (s[i + 1] == 'q') {
-						qq.push(s.substr(i, 4));
-						i += 3;
-						continue;
-						break;
-					}
-					
-
-				case 'c':
-					qq.push(s.substr(i, 3));
-					i += 2;
-					continue;
-					break;
-				default:
-					while (qq.notempty() && priority(s[i]) <= priority(qq.top()[0]) && (s[i] != '^' && priority(s[i]) == priority(qq.top()[0]))) {
-						result += qq.top();
-						qq.pop();
-					}
-					qq.push(std::string(1, s[i]));
-					break;
-				}
-			}
-		}
-
-		while (qq.notempty()) {
-			result += qq.top();
-			qq.pop();
-		}
-		return result;
-	}
-}
-
-int getRPN() {
-	cin.ignore();
-	std::string s;
-	std::cout << "Enter the expression: ";
-	getline(std::cin, s);
-	s.erase(std::remove_if(s.begin(), s.end(), std::isspace), s.end());
-	std::cout << "Result: " << topostfix(s) << "\n";
 	return 0;
 }
+
+
+
+
+
+string RPN(char* line, int maxLength);
+
+
+
+int getRPN() {
+    cin.ignore();
+	char line[128];
+    std::cout << "infix: ";
+    cin.getline(line, 128);
+    string res = RPN(line, 128);
+	std::cout << "Result rpn: " << res  << "\n";
+	return 0;
+}
+
+
+string RPN(char* line, int maxLength) {
+    Stack<char> stack = Stack<char>();
+    string res = "";
+
+    for (int i = 0; line[i] != '\0' && i < maxLength; i++)
+    {
+        
+        if (line[i] == ' ') continue;
+
+        int currentPriotity = GetPriority(line[i]);
+
+        if (currentPriotity == 0)
+        {
+            res += line[i];
+            if (i < maxLength - 1 && (GetPriority(line[i + 1]) != 0 || line[i + 1] == ' ' || line[i + 1] == '\0')) res += ' ';
+            continue;
+        }
+
+        if (currentPriotity == 1)
+        {
+            if (line[i] == '(') stack.Push('(');
+            else
+            {
+                while (stack.Peek() != '(')
+                {
+                    res += stack.Pop();
+                    res += ' ';
+                }
+                stack.Pop();
+            }
+            continue;
+        }
+
+        int checkPriority = GetPriority(stack.Peek());
+        while (checkPriority >= currentPriotity && checkPriority != 1 && stack.Peek() != NULL)
+        {
+            res += stack.Pop();
+            res += ' ';
+            checkPriority = GetPriority(stack.Peek());
+        }
+        if (line[i] == 'c') {
+            i += 2;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            stack.Push(line[i - 2]);
+            continue;
+        }
+        if (line[i] == 'p') {
+            i += 1;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            continue;
+        }
+        if (line[i] == 'l') {
+            if (line[i + 1] == 'n') {
+                i += 1;
+                stack.Push(line[i]);
+                stack.Push(line[i - 1]);
+                continue;
+                }
+            i += 2;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            stack.Push(line[i - 2]);
+            continue;
+        }
+        if (line[i] == 's') {
+            if (line[i + 1] == 'q') {
+                i += 3;
+                stack.Push(line[i]);
+                stack.Push(line[i - 1]);
+                stack.Push(line[i - 2]);
+                stack.Push(line[i - 3]);
+                continue;
+            }
+            i += 2;
+            stack.Push(line[i]);
+            stack.Push(line[i - 1]);
+            stack.Push(line[i - 2]);
+            continue;
+        }
+        stack.Push(line[i]);
+
+    }
+    while (stack.Peek() != NULL) {
+        res += stack.Pop();
+        res += ' ';
+    }
+    return res;
+}
+
 #endif
