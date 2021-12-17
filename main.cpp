@@ -62,35 +62,7 @@ string RPN(char* line, int maxLength);
 void main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "rus");
-    fprintf(stderr, "Reverse Polish notation calculator\n\
- q     quits\n\
- c     removes last stack location\n\
- C     clears whole stack\n\
- s     swaps the last 2 stack locations\n\
- sto   stores the last stack location\n\
- rcl   recalls it\n\
- chs   changes sign\n\
- 0x    prefix for entering hex numbers\n\n\
- operators are +,-,*,/,%% (+ and - also unary; %% is modulo)\n\
- sqrt\n\
- exp\n\
- log\n\
- ln\n\
- pow    10 2pow gives 100\n\
- pi     3.14\n\
- d      considers current number as degrees and converts to radials\n\
- sin,cos,tan  arguments in radials \n\
- asin,acos,atan  results in radials \n\
- rsp R2,R1,P1,Pivot,P2,S1,S2 given H,L,C \n\n\
-\n\
- extra commands: terse,verbose turns off/on full display\n\
-                 display       displays last stack location\n\
-                 input         prints until end of line and waits for\n\
-                 decimal number from standard input\n\
-                 print         prints untill end of line\n\
-                 #             ignored until end of line (comment)\n\
-                 repeat        reexecutes file\n");
-
+	
 
     //main2();
     int a(0);
@@ -105,7 +77,14 @@ void main(int argc, char* argv[])
 			break;
 		case 2:
 			cin.ignore();
+			fprintf(stderr, "Reverse Polish notation calculator\n\
+ q     quits\n\
+ c     removes last stack position\n\
+ C     clears  stack\n\
+ operators are +,-,*,/ (+ and - also unary)\n\
+ sqrt (4 sqrt result 2), exp, log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8), pi = 3.14, sin, cos, tan  arguments in radials, asin, acos, atan  results in radials\n");
 
+			cout << "Write RPN: ";
 			int optype;
 			double val, temp, temp2;
 			/* double exp(), log(), log10(),pow(), sqrt(),sin(),cos(),tan(),asin(),acos(),atan(); */

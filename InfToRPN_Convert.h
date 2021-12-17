@@ -63,8 +63,20 @@ std::string topostfix(std::string s) {
 					i += 2;
 					continue;
 					break;
-
+				case 't':
+					qq.push(s.substr(i, 2));
+					i += 1;
+					continue;
+					break;
 				case 's':
+					if (s[i + 1] == 'q') {
+						qq.push(s.substr(i, 4));
+						i += 3;
+						continue;
+						break;
+					}
+					
+
 				case 'c':
 					qq.push(s.substr(i, 3));
 					i += 2;
