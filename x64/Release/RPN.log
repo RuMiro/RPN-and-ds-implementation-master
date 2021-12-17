@@ -1,0 +1,9 @@
+﻿  main.cpp
+C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(709,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
+C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(709,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
+  Создание кода
+  1 of 207 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  RPN.vcxproj -> C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\RPN.exe

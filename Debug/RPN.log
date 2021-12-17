@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\Alex\source\repos\RPN\Source.cpp(29,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Alex\source\repos\RPN\Source.cpp(33,21): warning C4018: <: несоответствие типов со знаком и без знака
+  RPN.vcxproj -> C:\Users\Alex\source\repos\RPN\Debug\RPN.exe
