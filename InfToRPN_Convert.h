@@ -199,12 +199,10 @@ string RPN(char* line, int maxLength) {
             continue;
         }   
         if ((line[i] == 'p' && line[i + 1] == 'o' && line[i + 2] == 'w')) {
-            stack.Push(' ');
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
-            stack.Push(' ');
             continue;
         }
 
