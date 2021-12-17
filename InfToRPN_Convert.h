@@ -46,7 +46,7 @@ string RPN(char* line, int maxLength);
 
 
 
-int getRPN() {
+int getRPN() {          // получение строки  из инфиксной в польскую нотацию
     cin.ignore();
 	char line[128];
     std::cout << "Пример в инфиксной записи: ";
@@ -57,7 +57,7 @@ int getRPN() {
 }
 
 
-string RPN(char* line, int maxLength) {
+string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на приоритетах 
     Stack<char> stack = Stack<char>();
     string res = "";
 

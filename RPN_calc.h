@@ -94,7 +94,7 @@ void display(int longe);
 void untrail(void);
 void untrailstd(void);
 int isnotnumber(int c);
-int ischar(int c)
+int ischar(int c)		// проверка на букву
 {
 	return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
 }

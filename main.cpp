@@ -15,7 +15,6 @@ void main(int argc, char* argv[])
     setlocale(LC_ALL, "rus");
 	
 
-    //main2();
     int a(0);
 	while (true) {
 		
@@ -127,7 +126,7 @@ void main(int argc, char* argv[])
 				case OP_LN:
 					temp = pop();
 					if (temp <= 0) {
-						fprintf(stderr, "на ноль делить нельзя\n");
+						fprintf(stderr, "логарифм 0 не возможен\n");
 						push(temp);
 					}
 					else
@@ -147,7 +146,7 @@ void main(int argc, char* argv[])
 				case OP_DIV:
 					temp = pop();
 					if (temp == 0) {
-						fprintf(stderr, "divide by 0\n");
+						fprintf(stderr, "на ноль делить нельзя\n");
 						push(temp);
 					}
 					else {
@@ -160,7 +159,7 @@ void main(int argc, char* argv[])
 					temp = pop();
 					temp2 = pop();
 					if ((temp == 0) && (temp2 == 0)) {
-						fprintf(stderr, "cannot use 2 zeros\n");
+						fprintf(stderr, "степени 0 из 0 нет\n");
 						push(temp2);
 						push(temp);
 					}
@@ -272,24 +271,24 @@ int getop(double* numptr)
 		return(OP_MODULO);
 
 	case '-':
-		if (isnotnumber(c = getc(fp))) { /*subtraction*/
+		if (isnotnumber(c = getc(fp))) { 
 			ungetc(c, fp);
 			untrail();
 			return(OP_SUB);
 		}
-		else { /*negative number*/
+		else { // если число отрицательное
 			sign = NEG;
 			ungetc(c, fp);
 			return(OP_NOTHING);
 		}
 
 	case '+':
-		if (isnotnumber(c = getc(fp))) { /*addition*/
+		if (isnotnumber(c = getc(fp))) { 
 			ungetc(c, fp);
 			untrail();
 			return(OP_ADD);
 		}
-		else { /*positive number*/
+		else { 
 			ungetc(c, fp);
 			return(OP_NOTHING);
 		}
@@ -301,7 +300,7 @@ int getop(double* numptr)
 				;
 			return(keyptr->op);
 		}
-		else {  /*number*/
+		else {  
 			if (c == '0')
 				if ((c = getc(fp)) == 'x') {
 					if (fscanf_s(fp, "%x", &hex_num)) {
@@ -331,11 +330,11 @@ int getop(double* numptr)
 				untrail();
 				return(OP_NOTNUM);
 			}
-		} /*number*/
-	}  /*switch (c) */
+		} 
+	}  
 }
 
-void initstack(void)
+void initstack(void)		//инициализация стека
 {
 	int n;
 	for (n = 0; n < MAXSTACK; n++)
@@ -343,7 +342,7 @@ void initstack(void)
 	stackptr = stack;
 }
 
-void push(double num)
+void push(double num)	// добавить символ в стек
 {
 	if (stackptr == (stack + MAXSTACK)) {
 		fprintf(stderr, "неправильная запись\n");
@@ -353,7 +352,7 @@ void push(double num)
 	*stackptr++ = num;
 }
 
-double pop(void)
+double pop(void)		// выбрать из стека
 {
 	if (stackptr == stack) {
 		fprintf(stderr, "неправильная запись\n");
@@ -363,7 +362,7 @@ double pop(void)
 	return(*--stackptr);
 }
 
-void display(int longe)
+void display(int longe)		// показать текст
 {
 	double* ptr, double_abs(double);
 	printf("--------------------\n");
@@ -383,7 +382,7 @@ void display(int longe)
 	}
 }
 
-void untrail(void)
+void untrail(void)		// отслеживания символов
 {
 	int c;
 	while (((c = getc(fp)) == ' ') || (c == '\t'))
@@ -392,7 +391,7 @@ void untrail(void)
 		ungetc(c, fp);
 }
 
-void untrailstd(void)
+void untrailstd(void)		//отслеживание символа в буффере
 {
 	int c;
 	while (((c = getc(stdin)) == ' ') || (c == '\t'))
@@ -401,19 +400,19 @@ void untrailstd(void)
 		ungetc(c, stdin);
 }
 
-int isnotnumber(int c)
+int isnotnumber(int c)		// проверка на число 
 {
 	return((((c >= '0') && (c <= '9')) || (c == '.')) == 0);
 }
 
 
 
-double double_abs(double num)
+double double_abs(double num)			// проверка на унарный минус
 {
 	return(num < 0 ? -num : num);
 }
 
-void getkey(char* s, int c)
+void getkey(char* s, int c)		// получение символа
 {
 	if (c == '#')
 	{
@@ -434,7 +433,7 @@ void getkey(char* s, int c)
 	}
 }
 
-int keycmp(char* s, char* t)
+int keycmp(char* s, char* t)			// перекопирование чаров 
 {
 	for (; *s == *t; s++, t++)
 		if (*s == '\0')
