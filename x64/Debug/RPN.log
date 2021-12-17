@@ -1,4 +1,16 @@
 ﻿  main.cpp
-C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(631,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
-C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(631,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
-  RPN.vcxproj -> C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\x64\Debug\RPN.exe
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(37,5): error C2601: getop: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(127,6): error C2601: initstack: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(135,6): error C2601: push: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(147,6): error C2601: display: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(167,6): error C2601: untrail: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(176,6): error C2601: untrailstd: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(191,6): error C2601: getkey: недопустимые локальные определения функций
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): message : эта строка содержит скобку "{", которая пока не имеет парной
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(20): fatal error C1075: "{": не найдена несоответствующая лексема
