@@ -1,49 +1,39 @@
-#pragma once
+
 #include <iostream>
-#include "spisok.h"
+#include <string>
 
-template <typename T>
-class stacks : public list<T> {
-
-public:
-	stacks();
-	~stacks();
-	bool notempty();
-	T top();
-	void push(T val);
-	void pop();
-
-private:
-	list<T>* newstack;
+template<class T>
+struct StackUnit
+{
+    T Data;
+    StackUnit* Tail;
 };
 
-template <typename T>
-stacks<T>::stacks() {
-	newstack = new list<T>;
-}
+template<class T>
+class Stack
+{
+    StackUnit<T>* _head = nullptr;
 
-template <typename T>
-stacks<T>::~stacks() {
-	delete newstack;
-}
+public:
+    T Peek() {
+        if (_head == nullptr) return NULL;
+        return _head->Data;
+    }
 
-template <typename T>
-bool stacks <T>::notempty() {
-	return newstack->head;
-}
+    T Pop()
+    {
+        T data = _head->Data;
+        StackUnit<T>* newHead = _head->Tail;
+        delete _head;
+        _head = newHead;
+        return data;
+    }
 
-template <typename T>
-T stacks<T>::top() {
-	//if (newstack->head == nullptr) return NULL;
-	return newstack->head->val;
-}
-
-template <typename T>
-void stacks<T>::push(T val) {
-	newstack->addnode(val);
-}
-
-template <typename T>
-void stacks<T>::pop() {
-	if (newstack->head) newstack->deletenode();
+    void Push(T data)
+    {
+        StackUnit<T>* newUnit = new StackUnit<T>;
+        newUnit->Data = data;
+        newUnit->Tail = _head;
+        _head = newUnit;
+    }
 }
