@@ -33,12 +33,11 @@ void main(int argc, char* argv[])
  c     removes last stack position\n\
  C     clears  stack\n\
  operators are +,-,*,/ (+ and - also unary)\n\
- sqrt (4 sqrt result 2), exp, log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8), pi = 3.14, sin, cos, tan  arguments in radials, asin, acos, atan  results in radials\n");
+ sqrt (4 sqrt result 2),  log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8), pi = 3.14, sin, cos, tan  arguments in radians, asin, acos, atan  results in radians\n");
 
 			cout << "Write RPN: ";
 			int optype;
 			double val, temp, temp2;
-			/* double exp(), log(), log10(),pow(), sqrt(),sin(),cos(),tan(),asin(),acos(),atan(); */
 
 			if (argc == 1)
 				fp = stdin;
@@ -467,21 +466,7 @@ void main(int argc, char* argv[])
 					break;
 				}
 
-				case OP_RSP:
-				{
-					double c = pop();//close
-					double l = pop();//low
-					double h = pop();//high
-					double p = (h + l + c) / 3;//pivot
-					push(p + (h - l));//R2
-					push((2 * p) - l);//R1
-					push((2 * p) - h + 0.68 * (h - l));//P1
-					push(p);                 //Pivot
-					push((2 * p) - h + 0.32 * (h - l));//P2
-					push((2 * p) - h);//S1
-					push(p - (h - l));//S2
-					break;
-				}
+
 
 				case OP_MODULO:
 					temp = pop();
