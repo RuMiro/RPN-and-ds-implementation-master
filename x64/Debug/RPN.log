@@ -1,4 +1,4 @@
 ﻿  main.cpp
-C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(680,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
-C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(680,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(631,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
+C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\main.cpp(631,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
   RPN.vcxproj -> C:\Users\Solidius Signum\source\repos\RPN-and-ds-implementation-master\x64\Debug\RPN.exe
