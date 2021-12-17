@@ -69,7 +69,7 @@ string RPN(char* line, int maxLength) {
         if (currentPriotity == 0)
         {
             res += line[i];
-            if (i < maxLength - 1 && (GetPriority(line[i + 1]) != 0 || line[i + 1] == ' ' || line[i + 1] == '\0')) res += ' ';
+            if (i < maxLength - 1 && (GetPriority(line[i + 1]) != 0 || line[i + 1] == ' ')) res += ' ';
             continue;
         }
 
@@ -94,54 +94,53 @@ string RPN(char* line, int maxLength) {
             checkPriority = GetPriority(stack.Peek());
         }
         if ((line[i] == 'c' && line[i + 1] == 'o' && line[i+2] == 's') || (line[i] == 'c' && line[i + 1] == 't' && line[i + 2] == 'g')) {
+            stack.Push(' ');
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
-            stack.Push(' ');
             continue;
         }
         if (line[i] == 'p' && line [i+1] == 'i') {
+            stack.Push(' ');
             i += 1;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
-            stack.Push(' ');
             continue;
         }
         if ((line[i] == 'l' && line[i + 1] == 'n') || (line[i] == 'l' && line[i + 1] == 'o' && line[i + 2] == 'g')) {
+            stack.Push(' ');
             if (line[i + 1] == 'n') {
                 i += 1;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
-                stack.Push(' ');
                 continue;
                 }
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
-            stack.Push(' ');
             continue;
         }
         if ((line[i] == 's' && line[i + 1] == 'i' && line[i + 2] == 'n') || ((line[i] == 's' && line[i + 1] == 'q' && line[i + 2] == 'r' && line[i + 3] == 't'))) {
+            stack.Push(' ');
             if (line[i + 1] == 'q') {
+
                 i += 3;
                 stack.Push(line[i]);
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
-                stack.Push(' ');
                 continue;
             }
             i += 2;
             stack.Push(line[i]);
             stack.Push(line[i - 1]);
             stack.Push(line[i - 2]);
-            stack.Push(' ');
             continue;
-        }
+        }   
+        if (currentPriotity != 0) stack.Push(' ');
         stack.Push(line[i]);
-        stack.Push(' ');
 
     }
     while (stack.Peek() != NULL) {
@@ -150,4 +149,5 @@ string RPN(char* line, int maxLength) {
     return res;
 }
 
-#endif
+#endif  
+// (1+2)^3+sin(4+5)^(6*7)

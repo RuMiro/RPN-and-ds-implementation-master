@@ -33,7 +33,8 @@ void main(int argc, char* argv[])
  c     removes last stack position\n\
  C     clears  stack\n\
  operators are +,-,*,/ (+ and - also unary)\n\
- sqrt (4 sqrt result 2),  log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8), pi = 3.14, sin, cos, tan  arguments in radians, asin, acos, atan  results in radians\n");
+ sqrt (4 sqrt result 2),  log (1 log result 0), ln(2,7 ln (прибризительно) result 1, pow (2 3pow result 8),\n\
+ pi = 3.14, sin, cos, tan, asin, acos, atan in radians\n");
 
 			cout << "Write RPN: ";
 			int optype;
@@ -93,10 +94,6 @@ void main(int argc, char* argv[])
 					push(sqrt(pop()));
 					break;
 
-				case OP_CHS:
-					push(-(pop()));
-					break;
-
 				case OP_DEGREE:
 					push(((pop()) * M_PI) / 180.0);
 					break;
@@ -123,10 +120,6 @@ void main(int argc, char* argv[])
 
 				case OP_ATAN:
 					push(atan(pop()));
-					break;
-
-				case OP_EXP:
-					push(exp(pop()));
 					break;
 
 				case OP_LN:
@@ -185,237 +178,6 @@ void main(int argc, char* argv[])
 					initstack();
 					break;
 
-				case OP_SWAP:
-					temp = pop();
-					temp2 = pop();
-					push(temp);
-					push(temp2);
-					break;
-
-				case OP_STO:
-					push(store = pop());
-					break;
-
-				case OP_STOA:
-					push(storea = pop());
-					break;
-
-				case OP_STOB:
-					push(storeb = pop());
-					break;
-
-				case OP_STOC:
-					push(storec = pop());
-					break;
-
-				case OP_STOD:
-					push(stored = pop());
-					break;
-
-				case OP_STOE:
-					push(storee = pop());
-					break;
-
-				case OP_STOF:
-					push(storef = pop());
-					break;
-
-				case OP_STOG:
-					push(storeg = pop());
-					break;
-
-				case OP_STOH:
-					push(storeh = pop());
-					break;
-
-				case OP_STOI:
-					push(storei = pop());
-					break;
-
-				case OP_STOJ:
-					push(storej = pop());
-					break;
-
-				case OP_STOK:
-					push(storek = pop());
-					break;
-
-				case OP_STOL:
-					push(storel = pop());
-					break;
-
-				case OP_STOM:
-					push(storem = pop());
-					break;
-
-				case OP_STON:
-					push(storen = pop());
-					break;
-
-				case OP_STOO:
-					push(storeo = pop());
-					break;
-
-				case OP_STOP:
-					push(storep = pop());
-					break;
-
-				case OP_STOQ:
-					push(storeq = pop());
-					break;
-
-				case OP_STOR:
-					push(storer = pop());
-					break;
-
-				case OP_STOS:
-					push(stores = pop());
-					break;
-
-				case OP_STOT:
-					push(storet = pop());
-					break;
-
-				case OP_STOU:
-					push(storeu = pop());
-					break;
-
-				case OP_STOV:
-					push(storev = pop());
-					break;
-
-				case OP_STOW:
-					push(storew = pop());
-					break;
-
-				case OP_STOX:
-					push(storex = pop());
-					break;
-
-				case OP_STOY:
-					push(storey = pop());
-					break;
-
-				case OP_STOZ:
-					push(storez = pop());
-					break;
-
-				case OP_RCL:
-					push(store);
-					break;
-
-				case OP_RCLA:
-					push(storea);
-					break;
-
-				case OP_RCLB:
-					push(storeb);
-					break;
-
-				case OP_RCLC:
-					push(storec);
-					break;
-
-				case OP_RCLD:
-					push(stored);
-					break;
-
-				case OP_RCLE:
-					push(storee);
-					break;
-
-				case OP_RCLF:
-					push(storef);
-					break;
-
-				case OP_RCLG:
-					push(storeg);
-					break;
-
-				case OP_RCLH:
-					push(storeh);
-					break;
-
-				case OP_RCLI:
-					push(storei);
-					break;
-
-				case OP_RCLJ:
-					push(storej);
-					break;
-
-				case OP_RCLK:
-					push(storek);
-					break;
-
-				case OP_RCLL:
-					push(storel);
-					break;
-
-				case OP_RCLM:
-					push(storem);
-					break;
-
-				case OP_RCLN:
-					push(storen);
-					break;
-
-				case OP_RCLO:
-					push(storeo);
-					break;
-
-				case OP_RCLP:
-					push(storep);
-					break;
-
-				case OP_RCLQ:
-					push(storeq);
-					break;
-
-				case OP_RCLR:
-					push(storer);
-					break;
-
-				case OP_RCLS:
-					push(stores);
-					break;
-
-				case OP_RCLT:
-					push(storet);
-					break;
-
-				case OP_RCLU:
-					push(storeu);
-					break;
-
-				case OP_RCLV:
-					push(storev);
-					break;
-
-				case OP_RCLW:
-					push(storew);
-					break;
-
-				case OP_RCLX:
-					push(storex);
-					break;
-
-				case OP_RCLY:
-					push(storey);
-					break;
-
-				case OP_RCLZ:
-					push(storez);
-					break;
-
-				case OP_TERSE:
-					terse = 1;
-					break;
-
-				case OP_VERBOSE:
-					terse = 0;
-					break;
-
 				case OP_DISPLAY:
 					display(0);
 					break;
@@ -433,14 +195,7 @@ void main(int argc, char* argv[])
 					else exit(1);
 				}
 
-				case OP_REPEAT:
-					if (fp != stdin) {
-						fclose(fp);
-						fopen_s(&fp, argv[1], "r");
-					}
-					initstack();
-					break;
-
+	
 				case OP_NOTNUM:
 					fprintf(stderr, "not a number\n");
 					break;
@@ -465,7 +220,6 @@ void main(int argc, char* argv[])
 						;
 					break;
 				}
-
 
 
 				case OP_MODULO:

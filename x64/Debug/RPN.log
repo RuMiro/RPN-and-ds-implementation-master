@@ -1,4 +1,4 @@
 ﻿  main.cpp
-C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(695,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
-C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(695,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
+C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(378,22): warning C4474: "printf" : для строки формата передано слишком много аргументов
+C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\main.cpp(378,22): message : заполнители и их параметры ожидают переменное число аргументов в количестве 0, но было предоставлено 1
   RPN.vcxproj -> C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Debug\RPN.exe
