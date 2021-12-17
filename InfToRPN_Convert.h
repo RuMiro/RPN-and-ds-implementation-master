@@ -14,13 +14,12 @@ int GetPriority(char op) {
 	case'n':
 	case'c':
 	case'o':
-	case'p':
     case'l':
     case'g':
     case't':
     case'a':
     case'r':
-    case 'w':
+    case '^':
 		return 4;
 		break;
 	case '/':
@@ -83,6 +82,14 @@ string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на прио
 
         if (currentPriotity == 0)
         {
+            if (line[i] == 'p'  && line[i+1] == 'i') {
+                res += ' ';
+                i += 1;
+                res += line[i - 1];
+                res += line[i];
+                res += ' ';
+                continue;
+            }
             res += line[i];
             if (i < maxLength - 1 && (GetPriority(line[i + 1]) != 0 || line[i + 1] == ' ')) res += ' ';
             continue;
@@ -126,7 +133,7 @@ string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на прио
                 stack.Push(line[i - 1]);
                 stack.Push(line[i - 2]);
                 stack.Push(line[i - 3]);
-                stack.Push(' ');
+ 
                 continue;
             }
             if ((line[i + 1] == 't' && line[i + 2] == 'a' && line[i + 3] == 'n')) {
@@ -156,14 +163,7 @@ string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на прио
 
             continue;
         }
-        if (line[i] == 'p' && line [i+1] == 'i') {
-            i += 1;
-            stack.Push(line[i]);
-            stack.Push(line[i - 1]);
-            stack.Push(' ');
-
-            continue;
-        }
+        
         if ((line[i] == 'l' && line[i + 1] == 'n') || (line[i] == 'l' && line[i + 1] == 'o' && line[i + 2] == 'g')) {
             if (line[i + 1] == 'n') {
                 i += 1;
@@ -198,13 +198,8 @@ string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на прио
             stack.Push(' ');
             continue;
         }   
-        if ((line[i] == 'p' && line[i + 1] == 'o' && line[i + 2] == 'w')) {
-            i += 2;
-            stack.Push(line[i]);
-            stack.Push(line[i - 1]);
-            stack.Push(line[i - 2]);
-            continue;
-        }
+      
+        
 
         if (currentPriotity != 0) stack.Push(' ');
         stack.Push(line[i]);
@@ -220,13 +215,14 @@ string RPN(char* line, int maxLength) { // алгоритм перевода, основанный на прио
         res += c;
 
     }
-
+    res += ' ';
     size_t pos;
     while ((pos = res.find("  ")) != string::npos)
         res = res.replace(pos, 2, " ");
+
 
     return res;
 }
 
 #endif  
-// (1+2)pow3+sin(4+5)^(6*7)
+// (1+2)^3+sin(4+5)^(6*7)
