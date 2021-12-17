@@ -94,7 +94,10 @@ void display(int longe);
 void untrail(void);
 void untrailstd(void);
 int isnotnumber(int c);
-int ischar(int c);
+int ischar(int c)
+{
+	return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+}
 double double_abs(double num);
 void getkey(char* s, int c);
 int keycmp(char* s, char* t);

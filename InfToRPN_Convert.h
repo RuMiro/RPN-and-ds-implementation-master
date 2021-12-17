@@ -7,7 +7,7 @@
 #include "stack.h"
 
 ;
-int GetPriority(char op) {
+int GetPriority(char op) {      
 	switch (op) {
 	case's':
 	case'i':

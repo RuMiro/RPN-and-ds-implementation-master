@@ -406,10 +406,7 @@ int isnotnumber(int c)
 	return((((c >= '0') && (c <= '9')) || (c == '.')) == 0);
 }
 
-int ischar(int c)
-{
-	return(((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
-}
+
 
 double double_abs(double num)
 {

@@ -1,4 +1,3 @@
-﻿  UnitTest1.cpp
-     Создается библиотека C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\UnitTest1.lib и объект C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\UnitTest1.exp
+﻿     Создается библиотека C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\UnitTest1.lib и объект C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\UnitTest1.exp
 UnitTest1.obj : error LNK2001: неразрешенный внешний символ "int __cdecl ischar(int)" (?ischar@@YAHH@Z).
 C:\Users\Пользователь\Desktop\RPN-and-ds-implementation-master\x64\Release\UnitTest1.dll : fatal error LNK1120: неразрешенных внешних элементов: 1
